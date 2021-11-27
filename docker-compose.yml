@@ -8,7 +8,7 @@ services:
         container_name: assembleserver
         hostname: assembleserver
         ports:
-            - "3000:3000" 
+            - "3000:3000"
         volumes:
             - ./server:/server 
             - /server/node_modules
@@ -25,6 +25,16 @@ services:
             - "27017:27017" 
         networks:
             - assemble-net 
+    mongo-express:
+        image: mongo-express:latest
+        container_name: mongo-express 
+        ports:
+            - "8081:8081"
+        networks:
+            - assemble-net
+        depends_on:
+            - mongo
+
     nginx:
         build:
           context: ./nginx
@@ -32,11 +42,36 @@ services:
         container_name: proxy
         hostname: proxy
         ports:
-            - "81:81" 
+            - "443:443"
+            - "80:80"
+        volumes:
+            - ./volumes/certbot/conf:/etc/letsencrypt
+            - ./volumes/certbot/www:/var/www/certbot
         depends_on:
             - nodejs-app
         networks:
             - assemble-net
+
+    #just one time?
+    # duckdns: 
+    #     image: ghcr.io/linuxserver/duckdns
+    #     container_name: duckdns
+    #     environment:
+    #         - PUID=1000
+    #         - PGID=1000
+    #         - TZ=Asia/Seoul
+    #         - SUBDOMAINS=wkuassemble
+    #         - TOKEN=3b72415a-e3da-4833-9322-3a6323748fce
+    #         - LOG_FILE=true
+    #     volumes:
+    #         - ./config:/config #optional
+    #     restart: unless-stopped
+    # certbot:
+    #     image: certbot/certbot:latest
+    #     volumes:
+    #         - ./volumes/certbot/conf:/etc/letsencrypt
+    #         - ./volumes/certbot/www:/var/www/certbot
+    #         - ./log/letsencrypt:/var/log/letsencrypt
 
 networks:
   assemble-net:

@@ -1,0 +1,161 @@
+2021-11-25 10:47:14,011:DEBUG:certbot._internal.main:certbot version: 1.21.0
+2021-11-25 10:47:14,012:DEBUG:certbot._internal.main:Location of certbot entry point: /usr/local/bin/certbot
+2021-11-25 10:47:14,012:DEBUG:certbot._internal.main:Arguments: ['--webroot', '-w', '/var/www/certbot', '--email', 'assemble@ruu.kr', '-d', 'wkuassemble.duckdns.org', '--rsa-key-size', '4096', '--agree-tos', '--force-renewal']
+2021-11-25 10:47:14,012:DEBUG:certbot._internal.main:Discovered plugins: PluginsRegistry(PluginEntryPoint#manual,PluginEntryPoint#null,PluginEntryPoint#standalone,PluginEntryPoint#webroot)
+2021-11-25 10:47:14,026:DEBUG:certbot._internal.log:Root logging level set at 30
+2021-11-25 10:47:14,026:DEBUG:certbot._internal.plugins.selection:Requested authenticator webroot and installer None
+2021-11-25 10:47:14,031:DEBUG:certbot._internal.plugins.selection:Single candidate plugin: * webroot
+Description: Place files in webroot directory
+Interfaces: Authenticator, Plugin
+Entry point: webroot = certbot._internal.plugins.webroot:Authenticator
+Initialized: <certbot._internal.plugins.webroot.Authenticator object at 0x7f74b1b10670>
+Prep: True
+2021-11-25 10:47:14,031:DEBUG:certbot._internal.plugins.selection:Selected authenticator <certbot._internal.plugins.webroot.Authenticator object at 0x7f74b1b10670> and installer None
+2021-11-25 10:47:14,031:INFO:certbot._internal.plugins.selection:Plugins selected: Authenticator webroot, Installer None
+2021-11-25 10:47:14,864:DEBUG:acme.client:Sending GET request to https://acme-v02.api.letsencrypt.org/directory.
+2021-11-25 10:47:14,866:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): acme-v02.api.letsencrypt.org:443
+2021-11-25 10:47:15,398:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "GET /directory HTTP/1.1" 200 658
+2021-11-25 10:47:15,399:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Thu, 25 Nov 2021 11:01:13 GMT
+Content-Type: application/json
+Content-Length: 658
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "FqzhjrEK6XY": "https://community.letsencrypt.org/t/adding-random-entries-to-the-directory/33417",
+  "keyChange": "https://acme-v02.api.letsencrypt.org/acme/key-change",
+  "meta": {
+    "caaIdentities": [
+      "letsencrypt.org"
+    ],
+    "termsOfService": "https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf",
+    "website": "https://letsencrypt.org"
+  },
+  "newAccount": "https://acme-v02.api.letsencrypt.org/acme/new-acct",
+  "newNonce": "https://acme-v02.api.letsencrypt.org/acme/new-nonce",
+  "newOrder": "https://acme-v02.api.letsencrypt.org/acme/new-order",
+  "revokeCert": "https://acme-v02.api.letsencrypt.org/acme/revoke-cert"
+}
+2021-11-25 10:47:15,400:DEBUG:acme.client:Requesting fresh nonce
+2021-11-25 10:47:15,400:DEBUG:acme.client:Sending HEAD request to https://acme-v02.api.letsencrypt.org/acme/new-nonce.
+2021-11-25 10:47:15,577:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "HEAD /acme/new-nonce HTTP/1.1" 200 0
+2021-11-25 10:47:15,578:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Thu, 25 Nov 2021 11:01:13 GMT
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0001t_59IzjZsz1lcmyh8JYQY4clXb2SQUZ6a4vJ0Jivko8
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+
+2021-11-25 10:47:15,578:DEBUG:acme.client:Storing nonce: 0001t_59IzjZsz1lcmyh8JYQY4clXb2SQUZ6a4vJ0Jivko8
+2021-11-25 10:47:15,578:DEBUG:acme.client:JWS payload:
+b'{\n  "contact": [\n    "mailto:assemble@ruu.kr"\n  ],\n  "termsOfServiceAgreed": true\n}'
+2021-11-25 10:47:15,589:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/new-acct:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAiandrIjogeyJuIjogIjRSc1dpZWpNRVRGWEJ2Y1dQbU5fUWtncjVVdERlMmVlZlp2RHROSDVWZVdPQ3kwUUZZRUw4VmhySURDbFZrVE0zaXRoc0hpOF80WFNZdURPYXBuV2ZkbE9SblU2Vl9Gb2hqUVdpS1pFNjR2Vl83RmdWYXA4SEh1UzJjSXh5TE9sSXVnVGZTZ3NnajZta1AxbGFIVkJwUkExZE4yRnlJdXVQakVwX2ZvOEFGZF9veDFsaUhVaklyeHl4VVNId2ZTV3d6OFZNb1V6cTFkQ3doYlUzcnZSQS1hN2UtbWVMZS1IdUljNURfUHU4cU0xR1pSSTJBcUYteVZQWk1PSzVnNzE0TzNSUmhnOU9XSEV4VnRzVWF0QVpkS1ZKaEFralVNcmlKOV82alpiOUNBbF9TLWYybHY0RFhocUpsdmIwSTlRMEhJOGxmeVBLMVQ0OE40VXJFR1FIOXVySXRnMmpWV3lXTm1RaTBjWTBzeWhsbkFISXk0WExibVloQkYybWw0bUlkRGpGdzFYU3dCV1plbTJ6MXk4OGxYdmtaSGNrZkVnaFRRWDI4cW5hMnVSQjc0WnFxcHNuNDNoM1BTNk5rdTVZWV8yNXQyekxxUHprVlphdGtiazA2Q2o5bFFsaXU0a1BUdmdhckZUWElZYy1zeXMteTM2eHVJa0RVTGltME00WHNpVVVMX2VDOEJhNG9tc1dqeVNPenFrUVVXbTNoNkhrMkFvSG1GeGplM2d6UE1lekRyMHppZDVfTmtqX3ZIQUUzd0paa19QTXVGT2t5UEVXU2JRWUY2WUwxSVl4b0RiU1UxdVkyMkNEUnNxb0ZmRDhrcFRtX2RvZFlENnNTNlBDdmppSzBmQ1pHeEJIekN5NkN4TDJFUFBicDUzTHFOWG04eVROWlV2YkNzIiwgImUiOiAiQVFBQiIsICJrdHkiOiAiUlNBIn0sICJub25jZSI6ICIwMDAxdF81OUl6alpzejFsY215aDhKWVFZNGNsWGIyU1FVWjZhNHZKMEppdmtvOCIsICJ1cmwiOiAiaHR0cHM6Ly9hY21lLXYwMi5hcGkubGV0c2VuY3J5cHQub3JnL2FjbWUvbmV3LWFjY3QifQ",
+  "signature": "WGl8gLj4hyQk8zmb4j5u6YNfs7bmFdNEaJuNQyiC18c_6P_2baz31_ZTI7TCOca87ma1CBeR0L40NXLjEd0LuhifUQH1KOMpp36YgwZGkNKE-BJgLpqX8FJZVUTMfGrmwl6EwoviiXJf8umAUMbzAjtA-SLVNFqdURWytS62FxjIV0clMat0qpf_E66YUFaJGm30v0TzbQEXUvAZ1EFIHTcS-ONB9ZWtNn6TDKc1UlBgUd7CuyWG0jYgQ7DtaJ6zj4h__pafcxx5n0njSLUpML3qSH_yaQnKqPsKqq6HqCAfyS7Az-ZhKUQ-F3Z9PcKlRuCS4xUJzoK7UqQlM66-Lxv3VqMKgvqVxO0gRk2Rhg2op-ee1pcxreK8N2G9dxB4bUILWtDi2aazAMa2B8WlHYaceSqB3qXpdPRB-r5j4Jae6f_ipN1Wp5KWZD4sEPzO4Yh6iI--QAvMfw1qwhhVK1_ee3oooxQHRffGGpH_eFmwi66tRfBqVmIQ1n8pnI83FbekVo8l5BTBLWyDw-1vgLCgMqnN2NVf8ZByVsdF-Vw9TRiFCP0kuJjiwaa6m7xBBhHueQJrLiEY5-1wmWJAL-1feaj0UVObAA1Z_Ta8FjdTU5P2yLpsju4hF-euDr5gFnxbX99W2G_Xyrz-CQp1dcUbhvoSxzPVmRJVTTGW8hg",
+  "payload": "ewogICJjb250YWN0IjogWwogICAgIm1haWx0bzphc3NlbWJsZUBydXUua3IiCiAgXSwKICAidGVybXNPZlNlcnZpY2VBZ3JlZWQiOiB0cnVlCn0"
+}
+2021-11-25 10:47:19,703:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/new-acct HTTP/1.1" 201 900
+2021-11-25 10:47:19,704:DEBUG:acme.client:Received response:
+HTTP 201
+Server: nginx
+Date: Thu, 25 Nov 2021 11:01:17 GMT
+Content-Type: application/json
+Content-Length: 900
+Connection: keep-alive
+Boulder-Requester: 294903850
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index", <https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf>;rel="terms-of-service"
+Location: https://acme-v02.api.letsencrypt.org/acme/acct/294903850
+Replay-Nonce: 0002aq0mhfuZdyW6zLc5fCP0fLviOIOmWW7dYzJJL9RM6b8
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "key": {
+    "kty": "RSA",
+    "n": "4RsWiejMETFXBvcWPmN_Qkgr5UtDe2eefZvDtNH5VeWOCy0QFYEL8VhrIDClVkTM3ithsHi8_4XSYuDOapnWfdlORnU6V_FohjQWiKZE64vV_7FgVap8HHuS2cIxyLOlIugTfSgsgj6mkP1laHVBpRA1dN2FyIuuPjEp_fo8AFd_ox1liHUjIrxyxUSHwfSWwz8VMoUzq1dCwhbU3rvRA-a7e-meLe-HuIc5D_Pu8qM1GZRI2AqF-yVPZMOK5g714O3RRhg9OWHExVtsUatAZdKVJhAkjUMriJ9_6jZb9CAl_S-f2lv4DXhqJlvb0I9Q0HI8lfyPK1T48N4UrEGQH9urItg2jVWyWNmQi0cY0syhlnAHIy4XLbmYhBF2ml4mIdDjFw1XSwBWZem2z1y88lXvkZHckfEghTQX28qna2uRB74Zqqpsn43h3PS6Nku5YY_25t2zLqPzkVZatkbk06Cj9lQliu4kPTvgarFTXIYc-sys-y36xuIkDULim0M4XsiUUL_eC8Ba4omsWjySOzqkQUWm3h6Hk2AoHmFxje3gzPMezDr0zid5_Nkj_vHAE3wJZk_PMuFOkyPEWSbQYF6YL1IYxoDbSU1uY22CDRsqoFfD8kpTm_dodYD6sS6PCvjiK0fCZGxBHzCy6CxL2EPPbp53LqNXm8yTNZUvbCs",
+    "e": "AQAB"
+  },
+  "contact": [
+    "mailto:assemble@ruu.kr"
+  ],
+  "initialIp": "61.245.248.138",
+  "createdAt": "2021-11-25T11:01:16.007681499Z",
+  "status": "valid"
+}
+2021-11-25 10:47:19,705:DEBUG:acme.client:Storing nonce: 0002aq0mhfuZdyW6zLc5fCP0fLviOIOmWW7dYzJJL9RM6b8
+2021-11-25 10:47:24,842:DEBUG:certbot._internal.display.obj:Notifying user: Account registered.
+2021-11-25 10:47:24,843:DEBUG:certbot._internal.main:Picked account: <Account(RegistrationResource(body=Registration(key=JWKRSA(key=<ComparableRSAKey(<cryptography.hazmat.backends.openssl.rsa._RSAPublicKey object at 0x7f74b16f29a0>)>), contact=('mailto:assemble@ruu.kr',), agreement=None, status='valid', terms_of_service_agreed=None, only_return_existing=None, external_account_binding=None), uri='https://acme-v02.api.letsencrypt.org/acme/acct/294903850', new_authzr_uri=None, terms_of_service='https://letsencrypt.org/documents/LE-SA-v1.2-November-15-2017.pdf'), 2bb74dc721a681c653a42a13323f2fb2, Meta(creation_dt=datetime.datetime(2021, 11, 25, 10, 47, 19, tzinfo=<UTC>), creation_host='4e941e21f851', register_to_eff=None))>
+2021-11-25 10:47:24,845:DEBUG:certbot._internal.display.obj:Notifying user: Requesting a certificate for wkuassemble.duckdns.org
+2021-11-25 10:47:25,141:DEBUG:certbot.crypto_util:Generating RSA key (4096 bits): /etc/letsencrypt/keys/0000_key-certbot.pem
+2021-11-25 10:47:25,148:DEBUG:certbot.crypto_util:Creating CSR: /etc/letsencrypt/csr/0000_csr-certbot.pem
+2021-11-25 10:47:25,149:DEBUG:acme.client:JWS payload:
+b'{\n  "identifiers": [\n    {\n      "type": "dns",\n      "value": "wkuassemble.duckdns.org"\n    }\n  ]\n}'
+2021-11-25 10:47:25,153:DEBUG:acme.client:Sending POST request to https://acme-v02.api.letsencrypt.org/acme/new-order:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2FjY3QvMjk0OTAzODUwIiwgIm5vbmNlIjogIjAwMDJhcTBtaGZ1WmR5VzZ6TGM1ZkNQMGZMdmlPSU9tV1c3ZFl6SkpMOVJNNmI4IiwgInVybCI6ICJodHRwczovL2FjbWUtdjAyLmFwaS5sZXRzZW5jcnlwdC5vcmcvYWNtZS9uZXctb3JkZXIifQ",
+  "signature": "efONINJFTdYqwZyIGGQw0LWzJzb46pIyYfPS3iS_RKX8XJAXFvMLAl7t41z8RvB9snYQjP9Gv3I904R5joBrxIQwrcrE2uVLWt7MtUxvzZfhlOOSf8srUkObFVYfcsp0_ph1XkIL8ytGIrVCVuFAsuBKtzhHO58O0ThtQWs7GEsyCqrXq0ey4SmWmmyJZtK7a0EsNrf43M0_CcU1ikvz1q4v1iTepYIIZPO5TEKPAQ-PiTnMrPfR_AWQTrbhcKc-iBZ3ad-cPm0uda96qLMXdE8-OUVVjcxiAF4uB-gEXBiOK7PiW6ldiRuz5TaKfIuj_BNW2yx2SdxnEJkirGsNPifgZ_aSqwacbdumlMyYYYh6e3YYHK8kI5h47FneM8xjfqUyOF0Zdw0NOsSACx7NwXEIuAuiYhuWF4F-mn2Z1U0it0SgE9U2zOwsfrvGEerYilNJQls5mq3eWl9zEm8YLDLv7xErl2bi14ogzG2bWU61xa_Qw0Ud1USiEdIXaK7iCB0pXz2Bi6vjQXXQKA6jV_hX5Wb_DQDoj1-ZO7l485jtgQsgDuKlFQGlGqDQytYlN9rNxf7HuVX8kO0VV8v198PhQmE0bXoMMaLSTyz2_qI83TBTz7sRCiOW-Gae8AdZae70elJ-D6p8RSPybghdrLGSdxTJ2vnRB10EVBKW_Vw",
+  "payload": "ewogICJpZGVudGlmaWVycyI6IFsKICAgIHsKICAgICAgInR5cGUiOiAiZG5zIiwKICAgICAgInZhbHVlIjogIndrdWFzc2VtYmxlLmR1Y2tkbnMub3JnIgogICAgfQogIF0KfQ"
+}
+2021-11-25 10:47:30,486:DEBUG:urllib3.connectionpool:https://acme-v02.api.letsencrypt.org:443 "POST /acme/new-order HTTP/1.1" 500 114
+2021-11-25 10:47:30,487:DEBUG:acme.client:Received response:
+HTTP 500
+Server: nginx
+Date: Thu, 25 Nov 2021 11:01:28 GMT
+Content-Type: application/problem+json
+Content-Length: 114
+Connection: keep-alive
+Boulder-Requester: 294903850
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 0002w9kG5ppedDxLIPAfZ1T8jIywPe-Ra_KRMLIG1xdo91Y
+
+{
+  "type": "urn:ietf:params:acme:error:serverInternal",
+  "detail": "Error creating new order",
+  "status": 500
+}
+2021-11-25 10:47:30,488:DEBUG:certbot._internal.log:Exiting abnormally:
+Traceback (most recent call last):
+  File "/usr/local/bin/certbot", line 33, in <module>
+    sys.exit(load_entry_point('certbot', 'console_scripts', 'certbot')())
+  File "/opt/certbot/src/certbot/certbot/main.py", line 15, in main
+    return internal_main.main(cli_args)
+  File "/opt/certbot/src/certbot/certbot/_internal/main.py", line 1574, in main
+    return config.func(config, plugins)
+  File "/opt/certbot/src/certbot/certbot/_internal/main.py", line 1434, in certonly
+    lineage = _get_and_save_cert(le_client, config, domains, certname, lineage)
+  File "/opt/certbot/src/certbot/certbot/_internal/main.py", line 133, in _get_and_save_cert
+    lineage = le_client.obtain_and_enroll_certificate(domains, certname)
+  File "/opt/certbot/src/certbot/certbot/_internal/client.py", line 459, in obtain_and_enroll_certificate
+    cert, chain, key, _ = self.obtain_certificate(domains)
+  File "/opt/certbot/src/certbot/certbot/_internal/client.py", line 389, in obtain_certificate
+    orderr = self._get_order_and_authorizations(csr.data, self.config.allow_subset_of_names)
+  File "/opt/certbot/src/certbot/certbot/_internal/client.py", line 421, in _get_order_and_authorizations
+    orderr = self.acme.new_order(csr_pem)
+  File "/opt/certbot/src/acme/acme/client.py", line 936, in new_order
+    return cast(ClientV2, self.client).new_order(csr_pem)
+  File "/opt/certbot/src/acme/acme/client.py", line 702, in new_order
+    response = self._post(self.directory['newOrder'], order)
+  File "/opt/certbot/src/acme/acme/client.py", line 101, in _post
+    return self.net.post(*args, **kwargs)
+  File "/opt/certbot/src/acme/acme/client.py", line 1269, in post
+    return self._post_once(*args, **kwargs)
+  File "/opt/certbot/src/acme/acme/client.py", line 1283, in _post_once
+    response = self._check_response(response, content_type=content_type)
+  File "/opt/certbot/src/acme/acme/client.py", line 1128, in _check_response
+    raise messages.Error.from_json(jobj)
+acme.messages.Error: urn:ietf:params:acme:error:serverInternal :: The server experienced an internal error :: Error creating new order
+2021-11-25 10:47:30,491:ERROR:certbot._internal.log:An unexpected error occurred:
+2021-11-25 10:47:30,491:ERROR:certbot._internal.log:The server experienced an internal error :: Error creating new order
