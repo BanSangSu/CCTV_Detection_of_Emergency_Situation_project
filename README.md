@@ -1,4 +1,4 @@
-# CCTV_Detection_of_Emergency_Situation_project
+# CCTV Detection of Emergency Situation System Project
 ### **Univ Project 2021 Silver prize(2nd) :2nd_place_medal:**  
 - **Organiser**: Leaders in INdustry-university Cooperation(LINC)
 - **Period**: 8th Sep - 8th Dec, 2021
